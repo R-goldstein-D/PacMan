@@ -22,6 +22,19 @@ namespace PacMan
         //game variables
         public static int score;
 
+        //player control variables
+        public static bool upArrowDown;
+        public static bool leftArrowDown;
+        public static bool downArrowDown;
+        public static bool rightArrowDown;
+
+        public static bool aDown;
+        public static bool wDown;
+        public static bool sDown;
+        public static bool dDown;
+
+        //characters
+        Character pacMan = new Character();
         public GameScreen()
         {
             InitializeComponent();
@@ -34,6 +47,9 @@ namespace PacMan
 
             score = 0;
 
+            //set up Pac-Man
+            pacMan = new Character("left", 205, 335, 20, 225, 10, Form1.pacManBrush);
+
         }
 
         private void GameScreen_Paint(object sender, PaintEventArgs e)
@@ -43,6 +59,9 @@ namespace PacMan
             {
                 e.Graphics.FillRectangle(wallBrush, walls[i]);
             }
+
+            //draw pacman
+            e.Graphics.FillPie(pacMan.colour, pacMan.x, pacMan.y, pacMan.size, pacMan.size, pacMan.startAngle, 270);
         }
         public void SetWalls()
         {
@@ -147,6 +166,70 @@ namespace PacMan
             walls.Add(new Rectangle(350, 360, 180, insideWall));
             //ghost house
             walls.Add(new Rectangle(380, 200, 130, 48));
+        }
+
+        private void GameScreen_KeyUp(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                //second player controls
+                case Keys.W:
+                    wDown = false;
+                    break;
+                case Keys.A:
+                    aDown = false;
+                    break;
+                case Keys.S:
+                    sDown = false;
+                    break;
+                case Keys.D:
+                    dDown = false;
+                    break;
+                case Keys.Up:
+                    upArrowDown = false;
+                    break;
+                case Keys.Left:
+                    leftArrowDown = false;
+                    break;
+                case Keys.Down:
+                    downArrowDown = false;
+                    break;
+                case Keys.Right:
+                    rightArrowDown = false;
+                    break;
+            }
+        }
+
+        private void GameScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                //second player controls
+                case Keys.W:
+                    wDown = true;
+                    break;
+                case Keys.A:
+                    aDown = true;
+                    break;
+                case Keys.S:
+                    sDown = true;
+                    break;
+                case Keys.D:
+                    dDown = true;
+                    break;
+                case Keys.Up:
+                    upArrowDown = true;
+                    break;
+                case Keys.Left:
+                    leftArrowDown = true;
+                    break;
+                case Keys.Down:
+                    downArrowDown = true;
+                    break;
+                case Keys.Right:
+                    rightArrowDown = true;
+                    break;
+            }
         }
     }
 }

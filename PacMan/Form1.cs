@@ -12,12 +12,15 @@ namespace PacMan
 {
     public partial class Form1 : Form
     {
+        public static SolidBrush pacManBrush = new SolidBrush(Color.Yellow);
         public Form1()
         {
             InitializeComponent();
 
             //open menu screen when the program starts
             ChangeScreen(this, new MenuScreen());
+
+
         }
         public static void ChangeScreen(object sender, UserControl next)
         {

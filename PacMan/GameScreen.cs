@@ -34,7 +34,7 @@ namespace PacMan
         public static bool dDown;
 
         //characters
-        Character pacMan = new Character();
+        Character pacMan;
         public GameScreen()
         {
             InitializeComponent();
@@ -48,10 +48,15 @@ namespace PacMan
             score = 0;
 
             //set up Pac-Man
-            pacMan = new Character("left", 205, 335, 20, 225, 10, Form1.pacManBrush);
+            pacMan = new Character("right", 215, 320, 20, 45, 20, Form1.pacManBrush);
 
         }
 
+        private void gameTimer_Tick(object sender, EventArgs e)
+        {
+            pacMan.Move();
+           
+        }
         private void GameScreen_Paint(object sender, PaintEventArgs e)
         {
             //draw walls

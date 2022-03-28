@@ -40,16 +40,18 @@ namespace PacMan
         {
             InitializeComponent();
             InitializeGame();
-            SetWalls();
         }
         public void InitializeGame()
         {
+            SetWalls();
+
             screenSize = new Size(this.Width, this.Height);
 
             score = 0;
 
             //set up Pac-Man
-            pacMan = new Character("right", 215, 320, 20, 45, 5, Form1.pacManBrush);
+            pacMan = new Character("right", 215, 320, 20, 45, 3, Form1.pacManBrush);
+
 
         }
 
@@ -57,6 +59,12 @@ namespace PacMan
         {
             pacMan.Move(direction);
             Refresh();
+
+            //check for collision with wall in current direction
+            foreach (Rectangle w in walls)
+            {
+                pacMan.WallCollision(w);
+            }
         }
         private void GameScreen_Paint(object sender, PaintEventArgs e)
         {

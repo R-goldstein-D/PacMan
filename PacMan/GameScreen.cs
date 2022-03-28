@@ -33,6 +33,7 @@ namespace PacMan
         public static bool sDown;
         public static bool dDown;
 
+        string direction;
         //characters
         Character pacMan;
         public GameScreen()
@@ -48,14 +49,14 @@ namespace PacMan
             score = 0;
 
             //set up Pac-Man
-            pacMan = new Character("right", 215, 320, 20, 45, 20, Form1.pacManBrush);
+            pacMan = new Character("right", 215, 320, 20, 45, 5, Form1.pacManBrush);
 
         }
 
         private void gameTimer_Tick(object sender, EventArgs e)
         {
-            pacMan.Move();
-           
+            pacMan.Move(direction);
+            Refresh();
         }
         private void GameScreen_Paint(object sender, PaintEventArgs e)
         {
@@ -172,12 +173,43 @@ namespace PacMan
             //ghost house
             walls.Add(new Rectangle(380, 200, 130, 48));
         }
-
+        private void GameScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                //second key controls
+                case Keys.W:
+                    direction = "up";
+                    break;
+                case Keys.A:
+                    direction = "left";
+                    break;
+                case Keys.S:
+                    direction = "down";
+                    break;
+                case Keys.D:
+                    direction = "right";
+                    break;
+                //regular arrow keys
+                case Keys.Up:
+                    direction = "up";
+                    break;
+                case Keys.Left:
+                    direction = "left";
+                    break;
+                case Keys.Down:
+                    direction = "down";
+                    break;
+                case Keys.Right:
+                    direction = "right";
+                    break;
+            }
+        }
         private void GameScreen_KeyUp(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
             {
-                //second player controls
+                //second key controls
                 case Keys.W:
                     wDown = false;
                     break;
@@ -190,6 +222,7 @@ namespace PacMan
                 case Keys.D:
                     dDown = false;
                     break;
+               //regular arrow keys
                 case Keys.Up:
                     upArrowDown = false;
                     break;
@@ -201,38 +234,6 @@ namespace PacMan
                     break;
                 case Keys.Right:
                     rightArrowDown = false;
-                    break;
-            }
-        }
-
-        private void GameScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-            switch (e.KeyCode)
-            {
-                //second player controls
-                case Keys.W:
-                    wDown = true;
-                    break;
-                case Keys.A:
-                    aDown = true;
-                    break;
-                case Keys.S:
-                    sDown = true;
-                    break;
-                case Keys.D:
-                    dDown = true;
-                    break;
-                case Keys.Up:
-                    upArrowDown = true;
-                    break;
-                case Keys.Left:
-                    leftArrowDown = true;
-                    break;
-                case Keys.Down:
-                    downArrowDown = true;
-                    break;
-                case Keys.Right:
-                    rightArrowDown = true;
                     break;
             }
         }

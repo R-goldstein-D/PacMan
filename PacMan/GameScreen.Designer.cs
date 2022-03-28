@@ -69,6 +69,7 @@
             this.BackColor = System.Drawing.Color.Black;
             this.Controls.Add(this.scoreLabel);
             this.Controls.Add(this.livesLabel);
+            this.DoubleBuffered = true;
             this.Name = "GameScreen";
             this.Size = new System.Drawing.Size(1306, 665);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.GameScreen_Paint);

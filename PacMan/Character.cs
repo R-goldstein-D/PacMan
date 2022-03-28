@@ -25,7 +25,7 @@ namespace PacMan
             speed = _speed;
             colour = _colour;
         }
-        public void Move()
+        public void Move(string direction)
         {
             //track previous position in case of reset
             previousX = x;

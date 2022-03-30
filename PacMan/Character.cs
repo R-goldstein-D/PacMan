@@ -12,7 +12,7 @@ namespace PacMan
         public string direction;
         public int x, y, size, startAngle, speed, previousX, previousY;
         public SolidBrush colour;
-        public Rectangle top, left, bottom, right;
+        public Rectangle player;
 
         // pacman
         public Character(string _direction, int _x, int _y, int _size, int _startAngle, int _speed, SolidBrush _colour)
@@ -25,7 +25,7 @@ namespace PacMan
             speed = _speed;
             colour = _colour;
         }
-        public void Move(string direction)
+        public void Move()
         {
             //track previous position in case of reset
             previousX = x;
@@ -50,44 +50,19 @@ namespace PacMan
         }
         public void WallCollision(Rectangle r)
         {
-            switch (direction)
+            player = new Rectangle(x, y, size, size);
+            if (player.IntersectsWith(r))
             {
-                case "up":
-                    top = new Rectangle(x, y, size, 10);
-                    if (top.IntersectsWith(r))
-                    {
-                        PositionReset();
-                    }
-                    break;
-                case "left":
-                    left = new Rectangle(x, y, 10, size);
-                    if (left.IntersectsWith(r))
-                    {
-                        PositionReset();
-                    }
-                    break;
-                case "down":
-                    bottom = new Rectangle(x, y + 15, size, 1);
-                    if (bottom.IntersectsWith(r))
-                    {
-                        PositionReset();
-                    }
-                    break;
-                case "right":
-                    right = new Rectangle(x + 15, y, 1, 0);
-                    if (right.IntersectsWith(r))
-                    {
-                        PositionReset();
-                    }
-                    break;
+                PositionReset();
             }
+
         }
         //resets character to their previous position and set speed = 0
         public void PositionReset()
         {
             x = previousX;
             y = previousY;
-            speed = 0;
+            direction = "";
         }
     }
 }

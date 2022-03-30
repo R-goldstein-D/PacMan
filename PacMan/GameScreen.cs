@@ -33,7 +33,6 @@ namespace PacMan
         public static bool sDown;
         public static bool dDown;
 
-        string direction;
         //characters
         Character pacMan;
         public GameScreen()
@@ -57,7 +56,7 @@ namespace PacMan
 
         private void gameTimer_Tick(object sender, EventArgs e)
         {
-            pacMan.Move(direction);
+            pacMan.Move();
             Refresh();
 
             //check for collision with wall in current direction
@@ -187,29 +186,37 @@ namespace PacMan
             {
                 //second key controls
                 case Keys.W:
-                    direction = "up";
+                    wDown = true;
+                    pacMan.direction = "up";
                     break;
                 case Keys.A:
-                    direction = "left";
+                    aDown = true;
+                    pacMan.direction = "left";
                     break;
                 case Keys.S:
-                    direction = "down";
+                    sDown = true;
+                    pacMan.direction = "down";
                     break;
                 case Keys.D:
-                    direction = "right";
+                    dDown = true;
+                    pacMan.direction = "right";
                     break;
                 //regular arrow keys
                 case Keys.Up:
-                    direction = "up";
+                    upArrowDown = true;
+                    pacMan.direction = "up";
                     break;
                 case Keys.Left:
-                    direction = "left";
+                    leftArrowDown = true;
+                    pacMan.direction = "left";
                     break;
                 case Keys.Down:
-                    direction = "down";
+                    downArrowDown = true;
+                    pacMan.direction = "down";
                     break;
                 case Keys.Right:
-                    direction = "right";
+                    rightArrowDown = true;
+                    pacMan.direction = "right";
                     break;
             }
         }

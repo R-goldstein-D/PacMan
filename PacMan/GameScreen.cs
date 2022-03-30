@@ -64,6 +64,9 @@ namespace PacMan
             {
                 pacMan.WallCollision(w);
             }
+
+            //check if pacman touches the end of a tunnel
+            pacMan.TunnelTeleport(this.Width);
         }
         private void GameScreen_Paint(object sender, PaintEventArgs e)
         {

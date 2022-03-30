@@ -64,5 +64,18 @@ namespace PacMan
             y = previousY;
             direction = "";
         }
+
+        //tunnel teleport
+        public void TunnelTeleport(int width)
+        {
+            if (x <= -5)
+            {
+                x = width - size - 5;
+            }
+            else if (x >= width - 7)
+            {
+                x = 5;
+            }
+        }
     }
 }

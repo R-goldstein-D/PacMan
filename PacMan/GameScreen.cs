@@ -49,7 +49,7 @@ namespace PacMan
             score = 0;
 
             //set up Pac-Man
-            pacMan = new Character("right", 215, 320, 20, 45, 3, Form1.pacManBrush);
+            pacMan = new Character("right", 215, 320, 18, 45, 3, Form1.pacManBrush);
 
 
         }

@@ -49,7 +49,7 @@
             this.startgameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.startgameButton.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.startgameButton.ForeColor = System.Drawing.Color.Gold;
-            this.startgameButton.Location = new System.Drawing.Point(641, 240);
+            this.startgameButton.Location = new System.Drawing.Point(422, 492);
             this.startgameButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.startgameButton.Name = "startgameButton";
             this.startgameButton.Size = new System.Drawing.Size(172, 88);
@@ -63,7 +63,7 @@
             this.exitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.exitButton.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.exitButton.ForeColor = System.Drawing.Color.Gold;
-            this.exitButton.Location = new System.Drawing.Point(641, 438);
+            this.exitButton.Location = new System.Drawing.Point(811, 492);
             this.exitButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.exitButton.Name = "exitButton";
             this.exitButton.Size = new System.Drawing.Size(172, 88);
@@ -82,6 +82,7 @@
             this.Controls.Add(this.titleLabel);
             this.Name = "MenuScreen";
             this.Size = new System.Drawing.Size(1306, 665);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.MenuScreen_Paint);
             this.ResumeLayout(false);
 
         }

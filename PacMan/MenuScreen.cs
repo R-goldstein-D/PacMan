@@ -26,5 +26,11 @@ namespace PacMan
         {
             Application.Exit();
         }
+
+        private void MenuScreen_Paint(object sender, PaintEventArgs e)
+        {
+            //draw pacman
+            e.Graphics.FillPie(Form1.pacManBrush, 430, 180, 90, 90, 45, 270);
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace PacMan
         public string direction;
         public int x, y, size, startAngle, speed, previousX, previousY;
         public SolidBrush colour;
-        public Rectangle player;
+        public Rectangle player, entireCharacter;
 
         // pacman
         public Character(string _direction, int _x, int _y, int _size, int _startAngle, int _speed, SolidBrush _colour)
@@ -75,6 +75,23 @@ namespace PacMan
             else if (x >= width - 7)
             {
                 x = 5;
+            }
+        }
+        public bool PelletCollision(Pellet p)
+        {
+            //rectangles for collision
+            entireCharacter = new Rectangle(x, y, size, size);
+            Rectangle pRec = new Rectangle(p.x, p.y, p.size, p.size);
+
+            //check collision
+            if (entireCharacter.IntersectsWith(pRec)) //collision with  pellet
+            {
+                GameScreen.score += 10;
+                return (true);
+            }
+            else //no collision
+            {
+                return (false);
             }
         }
     }

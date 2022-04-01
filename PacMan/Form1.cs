@@ -13,6 +13,7 @@ namespace PacMan
     public partial class Form1 : Form
     {
         public static SolidBrush pacManBrush = new SolidBrush(Color.Yellow);
+        public static SolidBrush pelletBrush = new SolidBrush(Color.PaleVioletRed);
         public Form1()
         {
             InitializeComponent();

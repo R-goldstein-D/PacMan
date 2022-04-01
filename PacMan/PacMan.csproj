@@ -65,6 +65,7 @@
     <Compile Include="MenuScreen.Designer.cs">
       <DependentUpon>MenuScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pellet.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Wall.cs" />

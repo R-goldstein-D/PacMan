@@ -14,10 +14,14 @@ namespace PacMan
     {
         Size screenSize;
 
+
+        List<Pellet> pellets = new List<Pellet>();
+        List<Pellet> toRemovePellets = new List<Pellet>();
         List<Rectangle> walls = new List<Rectangle>();
 
         //brushes
         SolidBrush wallBrush = new SolidBrush(Color.DarkGreen);
+        SolidBrush writingBrush = new SolidBrush(Color.White);
 
         //game variables
         public static int score;
@@ -35,6 +39,8 @@ namespace PacMan
 
         //characters
         Character pacMan;
+
+        bool removePellet;
         public GameScreen()
         {
             InitializeComponent();
@@ -43,6 +49,7 @@ namespace PacMan
         public void InitializeGame()
         {
             SetWalls();
+            SetPellets();
 
             screenSize = new Size(this.Width, this.Height);
 
@@ -56,6 +63,7 @@ namespace PacMan
 
         private void gameTimer_Tick(object sender, EventArgs e)
         {
+            //move pac man
             pacMan.Move();
             Refresh();
 
@@ -65,11 +73,41 @@ namespace PacMan
                 pacMan.WallCollision(w);
             }
 
+            //check if pacman collides with a pellet, if so remove pellet
+            foreach (Pellet p in pellets)
+            {
+                removePellet = pacMan.PelletCollision(p);
+                if (removePellet)
+                {
+                    toRemovePellets.Add(p);
+                }
+            }
+
+            foreach (Pellet p in toRemovePellets)
+            {
+                pellets.Remove(p);
+            }
+
             //check if pacman touches the end of a tunnel
             pacMan.TunnelTeleport(this.Width);
+
+            //end if all pellets collected
+            if (pellets.Count() == 0)
+            {
+                
+            }
         }
         private void GameScreen_Paint(object sender, PaintEventArgs e)
         {
+            //update score
+            scoreLabel.Text = $"SCORE: {score}";
+
+            //draw powerups 
+            foreach (Pellet p in pellets)
+            {
+                e.Graphics.FillRectangle(Form1.pelletBrush, p.x, p.y, p.size, p.size);
+
+            }
             //draw walls
             for (int i = 0; i < walls.Count(); i++)
             {
@@ -92,7 +130,7 @@ namespace PacMan
             walls.Add(new Rectangle(75, 240, outsideWall, 45));
             walls.Add(new Rectangle(5, 285, 75, outsideWall));
             walls.Add(new Rectangle(5, 285, outsideWall, 160));
-            walls.Add(new Rectangle(5, this.Height - 10 , this.Width - 10, outsideWall)); //bottom
+            walls.Add(new Rectangle(5, this.Height - 10, this.Width - 10, outsideWall)); //bottom
             walls.Add(new Rectangle(this.Width - 10, 285, outsideWall, 160));
             walls.Add(new Rectangle(this.Width - 80, 285, 75, outsideWall));
             walls.Add(new Rectangle(this.Width - 80, 240, outsideWall, 45));
@@ -104,7 +142,7 @@ namespace PacMan
 
             int insideWall = 10;
             //R corner
-            walls.Add(new Rectangle(20, 60, 60, insideWall)); 
+            walls.Add(new Rectangle(20, 60, 60, insideWall));
             walls.Add(new Rectangle(20, 60, insideWall, 80));
             walls.Add(new Rectangle(20, 90, 60, insideWall));
             walls.Add(new Rectangle(80, 60, insideWall, 40));
@@ -183,6 +221,16 @@ namespace PacMan
             //ghost house
             walls.Add(new Rectangle(380, 200, 130, 48));
         }
+
+        public void SetPellets()
+        {
+            //power up that scare the ghosts
+            int pelletSize = 15;
+            pellets.Add(new Pellet(40, 43, pelletSize));
+            pellets.Add(new Pellet(300, 70, pelletSize));
+            pellets.Add(new Pellet(210, 290, pelletSize));
+            pellets.Add(new Pellet(300, 400, pelletSize));
+        }
         private void GameScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             switch (e.KeyCode)
@@ -240,7 +288,7 @@ namespace PacMan
                 case Keys.D:
                     dDown = false;
                     break;
-               //regular arrow keys
+                //regular arrow keys
                 case Keys.Up:
                     upArrowDown = false;
                     break;

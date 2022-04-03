@@ -31,20 +31,24 @@ namespace PacMan
             previousX = x;
             previousY = y;
 
-            //move in current direction
+            //move in current direction, change pac man mouth direaction too
             switch (direction)
             {
                 case "up":
                     y -= speed;
+                    startAngle = 315;
                     break;
                 case "left":
                     x -= speed;
+                    startAngle = 225;
                     break;
                 case "down":
                     y += speed;
+                    startAngle = 135;
                     break;
                 case "right":
                     x += speed;
+                    startAngle = 45;
                     break;
             }
         }

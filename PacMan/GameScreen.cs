@@ -8,12 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+//add pellets
+//fix game over meathod 
+//add sounds: pellet gained, game over, background music(?)
 namespace PacMan
 {
     public partial class GameScreen : UserControl
     {
         Size screenSize;
-
 
         List<Pellet> pellets = new List<Pellet>();
         List<Pellet> toRemovePellets = new List<Pellet>();
@@ -94,7 +96,7 @@ namespace PacMan
             //end if all pellets collected
             if (pellets.Count() == 0)
             {
-                
+                Winner();
             }
         }
         private void GameScreen_Paint(object sender, PaintEventArgs e)
@@ -224,12 +226,22 @@ namespace PacMan
 
         public void SetPellets()
         {
-            //power up that scare the ghosts
+            //pellets
             int pelletSize = 15;
             pellets.Add(new Pellet(40, 43, pelletSize));
             pellets.Add(new Pellet(300, 70, pelletSize));
             pellets.Add(new Pellet(210, 290, pelletSize));
             pellets.Add(new Pellet(300, 400, pelletSize));
+        }
+
+        public void Winner()
+        {
+            //play game over sound
+
+            //wait 1000 before switching sceens
+
+            //open winner screen 
+            Form1.ChangeScreen(this, new MenuScreen());
         }
         private void GameScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {

@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 //add pellets
-//fix game over meathod 
 //add sounds: pellet gained, game over, background music(?)
 namespace PacMan
 {
@@ -232,13 +231,16 @@ namespace PacMan
             pellets.Add(new Pellet(300, 70, pelletSize));
             pellets.Add(new Pellet(210, 290, pelletSize));
             pellets.Add(new Pellet(300, 400, pelletSize));
+            pellets.Add(new Pellet(510, 300, pelletSize));
+            pellets.Add(new Pellet(400, 300, pelletSize));
+            pellets.Add(new Pellet(410, 340, pelletSize));
         }
 
         public void Winner()
         {
-            //play game over sound
-
-            //wait 1000 before switching sceens
+            //game timer = false
+            gameTimer.Enabled = false;
+            //play winner sound
 
             //open winner screen 
             Form1.ChangeScreen(this, new MenuScreen());

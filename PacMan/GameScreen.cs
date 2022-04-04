@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
-//add pellets
-//add sounds: pellet gained, game over, background music(?)
+//add sounds: pellet gained, winner, background music(?)
 namespace PacMan
 {
     public partial class GameScreen : UserControl
@@ -38,10 +38,16 @@ namespace PacMan
         public static bool sDown;
         public static bool dDown;
 
-        //characters
+        //character
         Character pacMan;
 
+        //pellet
         bool removePellet;
+
+        //sounds
+        SoundPlayer youWin = new SoundPlayer(Properties.Resources.you_win);
+        public static SoundPlayer collision = new SoundPlayer(Properties.Resources.collision);
+
         public GameScreen()
         {
             InitializeComponent();
@@ -58,7 +64,6 @@ namespace PacMan
 
             //set up Pac-Man
             pacMan = new Character("right", 215, 320, 18, 45, 3, Form1.pacManBrush);
-
 
         }
 
@@ -94,7 +99,7 @@ namespace PacMan
 
             //end if all pellets collected
             if (pellets.Count() == 0)
-            {
+            { 
                 Winner();
             }
         }
@@ -103,7 +108,7 @@ namespace PacMan
             //update score
             scoreLabel.Text = $"SCORE: {score}";
 
-            //draw powerups 
+            //draw pellets 
             foreach (Pellet p in pellets)
             {
                 e.Graphics.FillRectangle(Form1.pelletBrush, p.x, p.y, p.size, p.size);
@@ -240,7 +245,9 @@ namespace PacMan
         {
             //game timer = false
             gameTimer.Enabled = false;
+
             //play winner sound
+            youWin.Play();
 
             //open winner screen 
             Form1.ChangeScreen(this, new MenuScreen());

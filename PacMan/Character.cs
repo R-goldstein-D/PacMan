@@ -90,6 +90,7 @@ namespace PacMan
             //check collision
             if (entireCharacter.IntersectsWith(pRec)) //collision with  pellet
             {
+                GameScreen.collision.Play();
                 GameScreen.score += 10;
                 return (true);
             }

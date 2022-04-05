@@ -31,7 +31,7 @@ namespace PacMan
             previousX = x;
             previousY = y;
 
-            //move in current direction, change pac man mouth direaction too
+            //move in current direction, change pac man mouth direction too
             switch (direction)
             {
                 case "up":
